@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قهوة طوب</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
+
+    img {
+      display: block;
+      width: 100vw;
+      height: auto;
+    }
+
+    /* تنسيق النافذة المنبثقة */
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #942424; /* اللون المحدث */
+      color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      font-size: 18px;
+      text-align: center;
+      display: none;
+    }
+
+    #popup button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: white;
+      color: #942424;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- نافذة منبثقة -->
+  <div id="popup">
+    صور الحلا بالأسفل
+    <br>
+    <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
+  </div>
+
+  <!-- الصور -->
+  <img src="1.jpg" alt="صورة 1">
+  <img src="2.jpg" alt="صورة 2">
+  <img src="3.jpg" alt="صورة 3">
+  <img src="4.jpg" alt="صورة 4">
+  <img src="5.jpg" alt="صورة 5">
+  <img src="6.jpg" alt="صورة 6">
+  <img src="7.jpg" alt="صورة 7">
+  <img src="8.jpg" alt="صورة 8">
+
+  <!-- تشغيل النافذة عند تحميل الصفحة -->
+  <script>
+    window.onload = function () {
+      document.getElementById('popup').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
