@@ -17,7 +17,6 @@
       height: auto;
     }
 
-    /* نافذة منبثقة */
     #popup {
       position: fixed;
       top: 50%;
@@ -29,7 +28,7 @@
       width: 270px;
       font-size: 18px;
       text-align: center;
-      border-radius: 8px; /* زوايا ناعمة */
+      border-radius: 0;
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
       z-index: 1000;
       display: none;
@@ -51,11 +50,10 @@
       background-color: black;
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 0;
       cursor: pointer;
     }
 
-    /* حركة ظهور جذابة (fade + bounce) */
     @keyframes popupBounce {
       0% {
         transform: translate(-50%, -70%) scale(0.7);
@@ -70,20 +68,19 @@
       }
       100% {
         transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- النافذة المنبثقة -->
   <div id="popup">
     <span>يمكنكم مشاهدة صور الحلا</span>
     <span>عند التمرير لأسفل الصفحة</span>
     <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
   </div>
 
-  <!-- الصور -->
   <img src="1.jpg" alt="صورة 1">
   <img src="2.jpg" alt="صورة 2">
   <img src="3.jpg" alt="صورة 3">
@@ -93,7 +90,6 @@
   <img src="7.jpg" alt="صورة 7">
   <img src="8.jpg" alt="صورة 8">
 
-  <!-- إظهار النافذة عند التحميل -->
   <script>
     window.onload = function () {
       const popup = document.getElementById('popup');
