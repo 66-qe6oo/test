@@ -17,7 +17,7 @@
       height: auto;
     }
 
-    /* النافذة المنبثقة */
+    /* نافذة منبثقة */
     #popup {
       position: fixed;
       top: 50%;
@@ -26,15 +26,15 @@
       background: #942424;
       color: white;
       padding: 20px 30px;
-      width: 260px;
+      width: 270px;
       font-size: 18px;
       text-align: center;
-      border-radius: 0;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      border-radius: 8px; /* زوايا ناعمة */
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
       z-index: 1000;
       display: none;
       opacity: 0;
-      animation: popupIn 1s forwards;
+      animation: popupBounce 1s ease forwards;
     }
 
     #popup span {
@@ -44,31 +44,32 @@
       line-height: 1.6;
     }
 
-    /* زر الإغلاق */
     #popup button {
       margin-top: 10px;
-      padding: 12px 40px; /* أكبر */
+      padding: 12px 40px;
       font-size: 18px;
       background-color: black;
       color: white;
       border: none;
-      border-radius: 0;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    /* تأثير الظهور */
-    @keyframes popupIn {
+    /* حركة ظهور جذابة (fade + bounce) */
+    @keyframes popupBounce {
       0% {
-        transform: translate(-50%, -60%) scale(0.9);
+        transform: translate(-50%, -70%) scale(0.7);
         opacity: 0;
       }
       50% {
-        transform: translate(-50%, -52%) scale(1.05);
+        transform: translate(-50%, -45%) scale(1.1);
         opacity: 1;
+      }
+      70% {
+        transform: translate(-50%, -52%) scale(0.95);
       }
       100% {
         transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
       }
     }
   </style>
@@ -92,7 +93,7 @@
   <img src="7.jpg" alt="صورة 7">
   <img src="8.jpg" alt="صورة 8">
 
-  <!-- تشغيل النافذة فقط بدون اهتزاز -->
+  <!-- إظهار النافذة عند التحميل -->
   <script>
     window.onload = function () {
       const popup = document.getElementById('popup');
