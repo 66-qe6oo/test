@@ -17,7 +17,7 @@
       height: auto;
     }
 
-    /* تنسيق النافذة المنبثقة */
+    /* نافذة منبثقة */
     #popup {
       position: fixed;
       top: 50%;
@@ -25,32 +25,56 @@
       transform: translate(-50%, -50%);
       background: #942424; /* أحمر غامق */
       color: white;
-      padding: 20px 30px;
-      border-radius: 0; /* مربع حاد */
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      font-size: 18px;
+      padding: 30px 40px;
+      width: 300px;
+      font-size: 20px;
       text-align: center;
+      border-radius: 0; /* حواف حادة */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
       display: none;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
 
+    /* زر الإغلاق */
     #popup button {
-      margin-top: 15px;
-      padding: 8px 16px;
+      margin-top: 20px;
+      padding: 10px 20px;
       font-size: 16px;
-      background-color: black; /* زر أسود */
-      color: white; /* نص أبيض */
+      background-color: black;
+      color: white;
       border: none;
-      border-radius: 0; /* مربع حاد */
+      border-radius: 0;
       cursor: pointer;
+    }
+
+    /* تأثير الظهور */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* اهتزاز كل فترة */
+    @keyframes shake {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      25% { transform: translate(-50%, -48%) rotate(1deg); }
+      50% { transform: translate(-50%, -50%) rotate(0deg); }
+      75% { transform: translate(-50%, -52%) rotate(-1deg); }
+      100% { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    /* تشغيل الاهتزاز */
+    .shake {
+      animation: shake 0.5s;
     }
   </style>
 </head>
 <body>
 
-  <!-- نافذة منبثقة -->
+  <!-- النافذة المنبثقة -->
   <div id="popup">
-    صور الحلا بالأسفل
+    يمكنكم مشاهدة صور الحلا عند التمرير لأسفل الصفحة
     <br>
     <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
   </div>
@@ -65,10 +89,17 @@
   <img src="7.jpg" alt="صورة 7">
   <img src="8.jpg" alt="صورة 8">
 
-  <!-- تشغيل النافذة عند تحميل الصفحة -->
+  <!-- تشغيل النافذة مع التأثير -->
   <script>
     window.onload = function () {
-      document.getElementById('popup').style.display = 'block';
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+
+      // تكرار الاهتزاز كل 5 ثوانٍ
+      setInterval(() => {
+        popup.classList.add('shake');
+        setTimeout(() => popup.classList.remove('shake'), 500);
+      }, 5000);
     };
   </script>
 </body>
