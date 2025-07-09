@@ -44,7 +44,7 @@
     /* زر الإغلاق */
     #popup button {
       margin-top: 15px;
-      padding: 8px 16px;
+      padding: 10px 30px; /* تمديد العرض */
       font-size: 16px;
       background-color: black;
       color: white;
@@ -53,7 +53,7 @@
       cursor: pointer;
     }
 
-    /* تأثير الظهور مع حركة */
+    /* تأثير الظهور */
     @keyframes popupIn {
       0% {
         transform: translate(-50%, -60%) scale(0.9);
@@ -69,7 +69,7 @@
       }
     }
 
-    /* اهتزاز متكرر */
+    /* اهتزاز */
     @keyframes shake {
       0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
       25% { transform: translate(-50%, -49%) rotate(1deg); }
@@ -107,17 +107,17 @@
       const popup = document.getElementById('popup');
       popup.style.display = 'block';
 
-      // إعادة تشغيل تأثير الظهور
-      popup.classList.remove('shake');
+      // بدء الاهتزاز بعد الظهور
       setTimeout(() => {
         popup.classList.add('shake');
-      }, 2000);
-
-      // تكرار الاهتزاز كل 5 ثواني
-      setInterval(() => {
-        popup.classList.add('shake');
         setTimeout(() => popup.classList.remove('shake'), 500);
-      }, 5000);
+
+        // تكرار كل ثانيتين
+        setInterval(() => {
+          popup.classList.add('shake');
+          setTimeout(() => popup.classList.remove('shake'), 500);
+        }, 2000);
+      }, 1000); // الانتظار حتى انتهاء حركة الظهور
     };
   </script>
 </body>
