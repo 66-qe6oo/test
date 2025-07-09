@@ -38,7 +38,8 @@
 
     #popup span {
       display: block;
-      text-shadow: 1px 1px 4px white;
+      color: black;
+      font-weight: bold;
       margin-bottom: 8px;
       line-height: 1.6;
     }
@@ -52,6 +53,23 @@
       border: none;
       border-radius: 0;
       cursor: pointer;
+    }
+
+    #countdown {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      border-radius: 50%;
+      background-color: white;
+      color: black;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     @keyframes popupBounce {
@@ -76,6 +94,7 @@
 <body>
 
   <div id="popup">
+    <div id="countdown">10</div>
     <span>يمكنكم مشاهدة صور الحلا</span>
     <span>عند التمرير لأسفل الصفحة</span>
     <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
@@ -93,7 +112,19 @@
   <script>
     window.onload = function () {
       const popup = document.getElementById('popup');
+      const countdown = document.getElementById('countdown');
+      let seconds = 10;
+
       popup.style.display = 'block';
+
+      const timer = setInterval(() => {
+        seconds--;
+        countdown.textContent = seconds;
+        if (seconds === 0) {
+          clearInterval(timer);
+          popup.style.display = 'none';
+        }
+      }, 1000);
     };
   </script>
 </body>
