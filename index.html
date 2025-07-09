@@ -17,30 +17,34 @@
       height: auto;
     }
 
-    /* نافذة منبثقة */
+    /* النافذة المنبثقة */
     #popup {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: #942424; /* أحمر غامق */
+      background: #942424;
       color: white;
-      padding: 30px 40px;
-      width: 300px;
-      font-size: 20px;
+      padding: 20px 30px;
+      width: 260px;
+      font-size: 18px;
       text-align: center;
-      border-radius: 0; /* حواف حادة */
+      border-radius: 0;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
       z-index: 1000;
       display: none;
       opacity: 0;
-      animation: fadeIn 1s forwards;
+      animation: popupIn 1s forwards;
+    }
+
+    #popup span {
+      text-shadow: 1px 1px 4px white;
     }
 
     /* زر الإغلاق */
     #popup button {
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 15px;
+      padding: 8px 16px;
       font-size: 16px;
       background-color: black;
       color: white;
@@ -49,22 +53,30 @@
       cursor: pointer;
     }
 
-    /* تأثير الظهور */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    /* تأثير الظهور مع حركة */
+    @keyframes popupIn {
+      0% {
+        transform: translate(-50%, -60%) scale(0.9);
+        opacity: 0;
+      }
+      50% {
+        transform: translate(-50%, -52%) scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
     }
 
-    /* اهتزاز كل فترة */
+    /* اهتزاز متكرر */
     @keyframes shake {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      25% { transform: translate(-50%, -48%) rotate(1deg); }
-      50% { transform: translate(-50%, -50%) rotate(0deg); }
+      0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+      25% { transform: translate(-50%, -49%) rotate(1deg); }
+      50% { transform: translate(-50%, -51%) rotate(0deg); }
       75% { transform: translate(-50%, -52%) rotate(-1deg); }
-      100% { transform: translate(-50%, -50%) rotate(0deg); }
     }
 
-    /* تشغيل الاهتزاز */
     .shake {
       animation: shake 0.5s;
     }
@@ -74,7 +86,7 @@
 
   <!-- النافذة المنبثقة -->
   <div id="popup">
-    يمكنكم مشاهدة صور الحلا عند التمرير لأسفل الصفحة
+    <span>يمكنكم مشاهدة صور الحلا عند التمرير لأسفل الصفحة</span>
     <br>
     <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
   </div>
@@ -89,13 +101,19 @@
   <img src="7.jpg" alt="صورة 7">
   <img src="8.jpg" alt="صورة 8">
 
-  <!-- تشغيل النافذة مع التأثير -->
+  <!-- تشغيل النافذة + الاهتزاز -->
   <script>
     window.onload = function () {
       const popup = document.getElementById('popup');
       popup.style.display = 'block';
 
-      // تكرار الاهتزاز كل 5 ثوانٍ
+      // إعادة تشغيل تأثير الظهور
+      popup.classList.remove('shake');
+      setTimeout(() => {
+        popup.classList.add('shake');
+      }, 2000);
+
+      // تكرار الاهتزاز كل 5 ثواني
       setInterval(() => {
         popup.classList.add('shake');
         setTimeout(() => popup.classList.remove('shake'), 500);
