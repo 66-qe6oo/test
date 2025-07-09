@@ -38,14 +38,17 @@
     }
 
     #popup span {
+      display: block;
       text-shadow: 1px 1px 4px white;
+      margin-bottom: 8px;
+      line-height: 1.6;
     }
 
     /* زر الإغلاق */
     #popup button {
-      margin-top: 15px;
-      padding: 10px 30px; /* تمديد العرض */
-      font-size: 16px;
+      margin-top: 10px;
+      padding: 12px 40px; /* أكبر */
+      font-size: 18px;
       background-color: black;
       color: white;
       border: none;
@@ -68,26 +71,14 @@
         opacity: 1;
       }
     }
-
-    /* اهتزاز */
-    @keyframes shake {
-      0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
-      25% { transform: translate(-50%, -49%) rotate(1deg); }
-      50% { transform: translate(-50%, -51%) rotate(0deg); }
-      75% { transform: translate(-50%, -52%) rotate(-1deg); }
-    }
-
-    .shake {
-      animation: shake 0.5s;
-    }
   </style>
 </head>
 <body>
 
   <!-- النافذة المنبثقة -->
   <div id="popup">
-    <span>يمكنكم مشاهدة صور الحلا عند التمرير لأسفل الصفحة</span>
-    <br>
+    <span>يمكنكم مشاهدة صور الحلا</span>
+    <span>عند التمرير لأسفل الصفحة</span>
     <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
   </div>
 
@@ -101,23 +92,11 @@
   <img src="7.jpg" alt="صورة 7">
   <img src="8.jpg" alt="صورة 8">
 
-  <!-- تشغيل النافذة + الاهتزاز -->
+  <!-- تشغيل النافذة فقط بدون اهتزاز -->
   <script>
     window.onload = function () {
       const popup = document.getElementById('popup');
       popup.style.display = 'block';
-
-      // بدء الاهتزاز بعد الظهور
-      setTimeout(() => {
-        popup.classList.add('shake');
-        setTimeout(() => popup.classList.remove('shake'), 500);
-
-        // تكرار كل ثانيتين
-        setInterval(() => {
-          popup.classList.add('shake');
-          setTimeout(() => popup.classList.remove('shake'), 500);
-        }, 2000);
-      }, 1000); // الانتظار حتى انتهاء حركة الظهور
     };
   </script>
 </body>
