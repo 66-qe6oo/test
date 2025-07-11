@@ -10,6 +10,7 @@
       padding: 0;
       background-color: #000;
       font-family: sans-serif;
+      overflow-x: hidden;
     }
 
     .gallery {
@@ -29,7 +30,6 @@
       box-sizing: border-box;
     }
 
-    /* Fullscreen viewer */
     #fullscreenViewer {
       position: fixed;
       top: 0;
@@ -46,7 +46,7 @@
     #fullscreenViewer img {
       width: 100vw;
       height: 100vh;
-      object-fit: contain; /* يمنع التشويه */
+      object-fit: contain;
     }
 
     #fullscreenViewer button {
@@ -93,10 +93,16 @@
       const image = document.getElementById('fullscreenImage');
       image.src = src;
       viewer.style.display = 'flex';
+
+      // إخفاء شريط التمرير
+      document.body.style.overflow = 'hidden';
     }
 
     function closeFullscreen() {
       document.getElementById('fullscreenViewer').style.display = 'none';
+
+      // إظهار شريط التمرير من جديد
+      document.body.style.overflow = 'auto';
     }
   </script>
 </body>
