@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>قهوة طوب</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background-color: #000;
+      font-family: sans-serif;
     }
 
-    img {
-      display: block;
-      width: 100vw;
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .gallery img {
+      width: calc(50% - 10px);
       height: auto;
+      cursor: pointer;
+      border-radius: 5px;
     }
 
+    /* Popup */
     #popup {
       position: fixed;
       top: 50%;
@@ -28,7 +39,6 @@
       width: 270px;
       font-size: 18px;
       text-align: center;
-      border-radius: 0;
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
       z-index: 1000;
       display: none;
@@ -38,7 +48,6 @@
 
     #popup span {
       display: block;
-      color: white;
       font-weight: bold;
       margin-bottom: 8px;
       line-height: 1.6;
@@ -51,7 +60,6 @@
       background-color: black;
       color: white;
       border: none;
-      border-radius: 0;
       cursor: pointer;
     }
 
@@ -70,6 +78,36 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    /* Fullscreen viewer */
+    #fullscreenViewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #fullscreenViewer img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #fullscreenViewer button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      font-size: 18px;
+      padding: 5px 10px;
+      cursor: pointer;
     }
 
     @keyframes popupBounce {
@@ -100,21 +138,27 @@
     <button onclick="document.getElementById('popup').style.display='none'">إغلاق</button>
   </div>
 
-  <img src="1.jpg" alt="صورة 1">
-  <img src="2.jpg" alt="صورة 2">
-  <img src="3.jpg" alt="صورة 3">
-  <img src="4.jpg" alt="صورة 4">
-  <img src="5.jpg" alt="صورة 5">
-  <img src="6.jpg" alt="صورة 6">
-  <img src="7.jpg" alt="صورة 7">
-  <img src="8.jpg" alt="صورة 8">
+  <div class="gallery">
+    <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(this.src)">
+    <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(this.src)">
+    <img src="3.jpg" alt="صورة 3" onclick="openFullscreen(this.src)">
+    <img src="4.jpg" alt="صورة 4" onclick="openFullscreen(this.src)">
+    <img src="5.jpg" alt="صورة 5" onclick="openFullscreen(this.src)">
+    <img src="6.jpg" alt="صورة 6" onclick="openFullscreen(this.src)">
+    <img src="7.jpg" alt="صورة 7" onclick="openFullscreen(this.src)">
+    <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
+  </div>
+
+  <div id="fullscreenViewer" onclick="closeFullscreen()">
+    <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
+    <img id="fullscreenImage" src="" alt="صورة مكبرة" />
+  </div>
 
   <script>
     window.onload = function () {
       const popup = document.getElementById('popup');
       const countdown = document.getElementById('countdown');
       let seconds = 15;
-
       popup.style.display = 'block';
 
       const timer = setInterval(() => {
@@ -126,6 +170,17 @@
         }
       }, 1000);
     };
+
+    function openFullscreen(src) {
+      const viewer = document.getElementById('fullscreenViewer');
+      const image = document.getElementById('fullscreenImage');
+      image.src = src;
+      viewer.style.display = 'flex';
+    }
+
+    function closeFullscreen() {
+      document.getElementById('fullscreenViewer').style.display = 'none';
+    }
   </script>
 </body>
 </html>
