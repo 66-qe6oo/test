@@ -18,13 +18,17 @@
       justify-content: center;
       gap: 10px;
       padding: 10px;
+      background-color: white; /* تقسيم أبيض */
     }
 
     .gallery img {
       width: calc(50% - 10px);
       height: auto;
       cursor: pointer;
+      border: 4px solid white; /* إطار أبيض */
       border-radius: 5px;
+      box-sizing: border-box;
+      background-color: white;
     }
 
     /* Popup */
@@ -103,11 +107,13 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      background: white;
+      background: #942424; /* خلفية الزر */
+      color: black;         /* لون الإكس */
       border: none;
-      font-size: 18px;
+      font-size: 24px;
       padding: 5px 10px;
       cursor: pointer;
+      border-radius: 5px;
     }
 
     @keyframes popupBounce {
