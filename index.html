@@ -49,7 +49,7 @@
       object-fit: contain;
     }
 
-    #fullscreenViewer button {
+    #fullscreenViewer button.close-btn {
       position: absolute;
       top: 20px;
       right: 20px;
@@ -67,43 +67,93 @@
       justify-content: center;
       font-weight: bold;
     }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 10000;
+      user-select: none;
+    }
+
+    .nav-left {
+      left: 10px;
+    }
+
+    .nav-right {
+      right: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <div class="gallery">
-    <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(this.src)">
-    <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(this.src)">
-    <img src="3.jpg" alt="صورة 3" onclick="openFullscreen(this.src)">
-    <img src="4.jpg" alt="صورة 4" onclick="openFullscreen(this.src)">
-    <img src="5.jpg" alt="صورة 5" onclick="openFullscreen(this.src)">
-    <img src="6.jpg" alt="صورة 6" onclick="openFullscreen(this.src)">
-    <img src="7.jpg" alt="صورة 7" onclick="openFullscreen(this.src)">
-    <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
+  <div class="gallery" id="imageGallery">
+    <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(0)">
+    <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(1)">
+    <img src="3.jpg" alt="صورة 3" onclick="openFullscreen(2)">
+    <img src="4.jpg" alt="صورة 4" onclick="openFullscreen(3)">
+    <img src="5.jpg" alt="صورة 5" onclick="openFullscreen(4)">
+    <img src="6.jpg" alt="صورة 6" onclick="openFullscreen(5)">
+    <img src="7.jpg" alt="صورة 7" onclick="openFullscreen(6)">
+    <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(7)">
   </div>
 
   <div id="fullscreenViewer" onclick="closeFullscreen()">
-    <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
+    <button class="close-btn" onclick="closeFullscreen(); event.stopPropagation()">✕</button>
+    <button class="nav-arrow nav-left" onclick="prevImage(); event.stopPropagation()">❮</button>
     <img id="fullscreenImage" src="" alt="صورة مكبرة" />
+    <button class="nav-arrow nav-right" onclick="nextImage(); event.stopPropagation()">❯</button>
   </div>
 
   <script>
-    function openFullscreen(src) {
-      const viewer = document.getElementById('fullscreenViewer');
-      const image = document.getElementById('fullscreenImage');
-      image.src = src;
-      viewer.style.display = 'flex';
+    const imagePaths = [
+      "1.jpg", "2.jpg", "3.jpg", "4.jpg",
+      "5.jpg", "6.jpg", "7.jpg", "8.jpg"
+    ];
 
-      // إخفاء شريط التمرير
+    let currentIndex = 0;
+
+    function openFullscreen(index) {
+      currentIndex = index;
+      document.getElementById('fullscreenImage').src = imagePaths[currentIndex];
+      document.getElementById('fullscreenViewer').style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
 
     function closeFullscreen() {
       document.getElementById('fullscreenViewer').style.display = 'none';
-
-      // إظهار شريط التمرير من جديد
       document.body.style.overflow = 'auto';
     }
+
+    function nextImage() {
+      if (currentIndex < imagePaths.length - 1) {
+        currentIndex++;
+        document.getElementById('fullscreenImage').src = imagePaths[currentIndex];
+      }
+    }
+
+    function prevImage() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        document.getElementById('fullscreenImage').src = imagePaths[currentIndex];
+      }
+    }
+
+    // دعم التنقل باستخدام أسهم الكيبورد
+    document.addEventListener('keydown', function (event) {
+      const viewer = document.getElementById('fullscreenViewer');
+      if (viewer.style.display === 'flex') {
+        if (event.key === 'ArrowRight') nextImage();
+        if (event.key === 'ArrowLeft') prevImage();
+        if (event.key === 'Escape') closeFullscreen();
+      }
+    });
   </script>
 </body>
 </html>
