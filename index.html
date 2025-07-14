@@ -11,10 +11,9 @@
       background-color: #000;
       font-family: sans-serif;
       overflow-x: hidden;
-      padding-top: 45px; /* يتوافق مع ارتفاع الشريط المصغّر */
+      padding-top: 45px;
     }
 
-    /* ✅ شريط علوي مصغّر مع محتوى في المنتصف دائماً */
     .top-bar {
       position: fixed;
       top: 0;
@@ -129,7 +128,6 @@
 </head>
 <body>
 
-  <!-- ✅ شريط علوي محتواه دائمًا في المنتصف -->
   <div class="top-bar" id="topBar">
     <div class="top-bar-content">
       <img src="tap.png" alt="اضغط">
@@ -137,7 +135,6 @@
     </div>
   </div>
 
-  <!-- ✅ معرض الصور -->
   <div class="gallery">
     <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(this.src)">
     <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(this.src)">
@@ -149,17 +146,14 @@
     <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
   </div>
 
-  <!-- ✅ عرض الصورة المكبرة -->
   <div id="fullscreenViewer" onclick="closeFullscreen()">
     <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
     <img id="fullscreenImage" src="" alt="صورة مكبرة" />
   </div>
 
-  <!-- ✅ سكربت -->
   <script>
     const topBar = document.getElementById('topBar');
 
-    // عند تحميل الصفحة
     window.addEventListener('load', () => {
       topBar.classList.add('slide-in-left');
     });
