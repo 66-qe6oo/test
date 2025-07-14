@@ -11,38 +11,40 @@
       background-color: #000;
       font-family: sans-serif;
       overflow-x: hidden;
-      padding-top: 50px;
+      padding-top: 45px; /* يتوافق مع ارتفاع الشريط المصغّر */
     }
 
+    /* ✅ شريط علوي مصغّر مع محتوى في المنتصف دائماً */
     .top-bar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
+      height: 45px;
       background-color: #942424;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 10000;
       transform: translateX(100%);
     }
 
-    /* ✅ مركز المحتوى داخل الشريط */
     .top-bar-content {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
 
     .top-bar-content img {
-      height: 32px;
+      height: 24px;
       width: auto;
     }
 
     .top-bar-content span {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
+      color: white;
     }
 
     .slide-in-left {
@@ -127,7 +129,7 @@
 </head>
 <body>
 
-  <!-- ✅ شريط علوي مع محتوى في المنتصف -->
+  <!-- ✅ شريط علوي محتواه دائمًا في المنتصف -->
   <div class="top-bar" id="topBar">
     <div class="top-bar-content">
       <img src="tap.png" alt="اضغط">
@@ -135,6 +137,7 @@
     </div>
   </div>
 
+  <!-- ✅ معرض الصور -->
   <div class="gallery">
     <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(this.src)">
     <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(this.src)">
@@ -146,14 +149,17 @@
     <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
   </div>
 
+  <!-- ✅ عرض الصورة المكبرة -->
   <div id="fullscreenViewer" onclick="closeFullscreen()">
     <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
     <img id="fullscreenImage" src="" alt="صورة مكبرة" />
   </div>
 
+  <!-- ✅ سكربت -->
   <script>
     const topBar = document.getElementById('topBar');
 
+    // عند تحميل الصفحة
     window.addEventListener('load', () => {
       topBar.classList.add('slide-in-left');
     });
