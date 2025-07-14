@@ -14,7 +14,7 @@
       padding-top: 50px; /* مساحة للشريط المثبت */
     }
 
-    /* ✅ الشريط العلوي المثبت */
+    /* ✅ الشريط العلوي */
     .top-bar {
       position: fixed;
       top: 0;
@@ -30,26 +30,25 @@
       font-size: 18px;
       font-weight: bold;
       z-index: 10000;
-      transform: translateX(0); /* البداية */
-      transition: none;
+      transform: translateX(100%); /* البداية خارج الشاشة */
     }
 
     .top-bar img {
-      height: 24px;
+      height: 32px;
       width: auto;
     }
 
-    /* ✅ عند الإغلاق: حركة دخول من اليسار لليمين */
-    .top-bar.slide-in {
-      animation: slideInRight 0.6s ease-out forwards;
+    /* ✅ حركة دخول من اليمين إلى اليسار */
+    .slide-in {
+      animation: slideInFromRight 0.6s ease-out forwards;
     }
 
-    @keyframes slideInRight {
+    @keyframes slideInFromRight {
       from {
-        transform: translateX(-100%);
+        transform: translateX(100%);
       }
       to {
-        transform: translateX(0%);
+        transform: translateX(0);
       }
     }
 
@@ -109,7 +108,7 @@
 </head>
 <body>
 
-  <!-- ✅ شريط علوي ثابت -->
+  <!-- ✅ شريط علوي يظهر فقط عند التحميل وعودة من الصورة -->
   <div class="top-bar" id="topBar">
     <img src="tap.png" alt="اضغط">
     <span>انقر على الصورة لعرضها</span>
@@ -132,30 +131,34 @@
   </div>
 
   <script>
+    const topBar = document.getElementById('topBar');
+
+    // ✅ عند تحميل الصفحة، قم بتشغيل الحركة
+    window.addEventListener('load', () => {
+      topBar.classList.add('slide-in');
+    });
+
     function openFullscreen(src) {
       const viewer = document.getElementById('fullscreenViewer');
       const image = document.getElementById('fullscreenImage');
-      const topBar = document.getElementById('topBar');
 
       image.src = src;
       viewer.style.display = 'flex';
       document.body.style.overflow = 'hidden';
 
-      // إخفاء الشريط مباشرة
+      // 🚫 إخفاء الشريط بدون حركة
       topBar.style.display = 'none';
     }
 
     function closeFullscreen() {
       const viewer = document.getElementById('fullscreenViewer');
-      const topBar = document.getElementById('topBar');
-
       viewer.style.display = 'none';
       document.body.style.overflow = 'auto';
 
-      // إعادة الشريط مع أنميشن دخول أفقي
+      // ✅ إظهار الشريط مجددًا مع حركة من اليمين إلى اليسار
       topBar.style.display = 'flex';
-      topBar.classList.remove('slide-in'); // لإعادة التشغيل عند تكرار الإغلاق
-      void topBar.offsetWidth; // إعادة تدفق DOM لإجبار الإعادة
+      topBar.classList.remove('slide-in'); // إعادة تشغيل الأنميشن
+      void topBar.offsetWidth; // إعادة تدفق DOM
       topBar.classList.add('slide-in');
     }
   </script>
