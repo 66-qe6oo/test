@@ -11,7 +11,7 @@
       background-color: #000;
       font-family: sans-serif;
       overflow-x: hidden;
-      padding-top: 50px; /* لإزاحة المحتوى لأسفل بسبب الشريط المثبت */
+      padding-top: 50px; /* مساحة للشريط المثبت */
     }
 
     /* ✅ الشريط العلوي المثبت */
@@ -30,11 +30,27 @@
       font-size: 18px;
       font-weight: bold;
       z-index: 10000;
+      transform: translateX(0); /* البداية */
+      transition: none;
     }
 
     .top-bar img {
       height: 24px;
       width: auto;
+    }
+
+    /* ✅ عند الإغلاق: حركة دخول من اليسار لليمين */
+    .top-bar.slide-in {
+      animation: slideInRight 0.6s ease-out forwards;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0%);
+      }
     }
 
     .gallery {
@@ -50,7 +66,6 @@
       height: auto;
       cursor: pointer;
       border: 4px solid white;
-      border-radius: 0;
       box-sizing: border-box;
     }
 
@@ -83,7 +98,6 @@
       font-size: 24px;
       padding: 8px 12px;
       cursor: pointer;
-      border-radius: 0;
       width: 40px;
       height: 40px;
       display: flex;
@@ -96,7 +110,7 @@
 <body>
 
   <!-- ✅ شريط علوي ثابت -->
-  <div class="top-bar">
+  <div class="top-bar" id="topBar">
     <img src="tap.png" alt="اضغط">
     <span>انقر على الصورة لعرضها</span>
   </div>
@@ -121,14 +135,28 @@
     function openFullscreen(src) {
       const viewer = document.getElementById('fullscreenViewer');
       const image = document.getElementById('fullscreenImage');
+      const topBar = document.getElementById('topBar');
+
       image.src = src;
       viewer.style.display = 'flex';
       document.body.style.overflow = 'hidden';
+
+      // إخفاء الشريط مباشرة
+      topBar.style.display = 'none';
     }
 
     function closeFullscreen() {
-      document.getElementById('fullscreenViewer').style.display = 'none';
+      const viewer = document.getElementById('fullscreenViewer');
+      const topBar = document.getElementById('topBar');
+
+      viewer.style.display = 'none';
       document.body.style.overflow = 'auto';
+
+      // إعادة الشريط مع أنميشن دخول أفقي
+      topBar.style.display = 'flex';
+      topBar.classList.remove('slide-in'); // لإعادة التشغيل عند تكرار الإغلاق
+      void topBar.offsetWidth; // إعادة تدفق DOM لإجبار الإعادة
+      topBar.classList.add('slide-in');
     }
   </script>
 </body>
