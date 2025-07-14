@@ -14,7 +14,6 @@
       padding-top: 50px;
     }
 
-    /* ✅ الشريط العلوي */
     .top-bar {
       position: fixed;
       top: 0;
@@ -22,23 +21,30 @@
       width: 100%;
       background-color: #942424;
       color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-size: 18px;
-      font-weight: bold;
+      padding: 10px 0;
+      text-align: center;
       z-index: 10000;
       transform: translateX(100%);
     }
 
-    .top-bar img {
+    /* ✅ مركز المحتوى داخل الشريط */
+    .top-bar-content {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .top-bar-content img {
       height: 32px;
       width: auto;
     }
 
-    /* ✅ حركة دخول من اليمين → اليسار */
+    .top-bar-content span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
     .slide-in-left {
       animation: slideInLeft 0.6s ease-out forwards;
     }
@@ -52,7 +58,6 @@
       }
     }
 
-    /* ✅ حركة دخول من اليسار → اليمين */
     .slide-in-right {
       animation: slideInRight 0.6s ease-out forwards;
     }
@@ -122,13 +127,14 @@
 </head>
 <body>
 
-  <!-- ✅ شريط علوي -->
+  <!-- ✅ شريط علوي مع محتوى في المنتصف -->
   <div class="top-bar" id="topBar">
-    <img src="tap.png" alt="اضغط">
-    <span>يُرجى النقر على الصورة المختارة لعرضها</span>
+    <div class="top-bar-content">
+      <img src="tap.png" alt="اضغط">
+      <span>يُرجى النقر على الصورة المختارة لعرضها</span>
+    </div>
   </div>
 
-  <!-- ✅ معرض الصور -->
   <div class="gallery">
     <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(this.src)">
     <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(this.src)">
@@ -140,17 +146,14 @@
     <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
   </div>
 
-  <!-- ✅ عرض الصورة بحجم كامل -->
   <div id="fullscreenViewer" onclick="closeFullscreen()">
     <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
     <img id="fullscreenImage" src="" alt="صورة مكبرة" />
   </div>
 
-  <!-- ✅ سكربت -->
   <script>
     const topBar = document.getElementById('topBar');
 
-    // عند تحميل الصفحة: دخول من اليمين إلى اليسار
     window.addEventListener('load', () => {
       topBar.classList.add('slide-in-left');
     });
@@ -163,7 +166,6 @@
       viewer.style.display = 'flex';
       document.body.style.overflow = 'hidden';
 
-      // إخفاء الشريط فورًا
       topBar.style.display = 'none';
     }
 
@@ -172,10 +174,9 @@
       viewer.style.display = 'none';
       document.body.style.overflow = 'auto';
 
-      // إعادة الشريط بحركة من اليسار إلى اليمين
       topBar.style.display = 'flex';
       topBar.classList.remove('slide-in-left', 'slide-in-right');
-      void topBar.offsetWidth; // إعادة تدفق DOM لإعادة تشغيل الأنميشن
+      void topBar.offsetWidth;
       topBar.classList.add('slide-in-right');
     }
   </script>
