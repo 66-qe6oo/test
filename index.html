@@ -13,6 +13,24 @@
       overflow-x: hidden;
     }
 
+    /* ✅ الشريط العلوي */
+    .top-bar {
+      background-color: #942424;
+      color: black;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .top-bar img {
+      height: 24px;
+      width: auto;
+    }
+
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -67,47 +85,13 @@
       justify-content: center;
       font-weight: bold;
     }
-
-    /* نافذة الإشعار */
-    .popup-hint {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #fff;
-      color: #000;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      animation: fadeInOut 6s ease forwards;
-      cursor: pointer;
-    }
-
-    .popup-hint span {
-      font-weight: bold;
-    }
-
-    .popup-hint .emoji {
-      font-size: 22px;
-    }
-
-    @keyframes fadeInOut {
-      0% { opacity: 0; transform: translateY(-10px); }
-      10% { opacity: 1; transform: translateY(0); }
-      80% { opacity: 1; }
-      100% { opacity: 0; transform: translateY(-10px); }
-    }
   </style>
 </head>
 <body>
 
-  <!-- نافذة الإشعار -->
-  <div class="popup-hint" onclick="this.style.display='none'">
-    <div class="emoji">👉</div>
+  <!-- ✅ الشريط العلوي -->
+  <div class="top-bar">
+    <img src="tap.png" alt="اضغط">
     <span>انقر على الصورة لعرضها</span>
   </div>
 
@@ -140,14 +124,6 @@
       document.getElementById('fullscreenViewer').style.display = 'none';
       document.body.style.overflow = 'auto';
     }
-
-    // إزالة النافذة بعد انتهاء الأنميشن
-    window.addEventListener('load', () => {
-      const hint = document.querySelector('.popup-hint');
-      setTimeout(() => {
-        hint && hint.remove();
-      }, 6000);
-    });
   </script>
 </body>
 </html>
