@@ -11,12 +11,17 @@
       background-color: #000;
       font-family: sans-serif;
       overflow-x: hidden;
+      padding-top: 50px; /* لإزاحة المحتوى لأسفل بسبب الشريط المثبت */
     }
 
-    /* ✅ الشريط العلوي */
+    /* ✅ الشريط العلوي المثبت */
     .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       background-color: #942424;
-      color: black;
+      color: white;
       padding: 10px 20px;
       display: flex;
       align-items: center;
@@ -24,6 +29,7 @@
       gap: 10px;
       font-size: 18px;
       font-weight: bold;
+      z-index: 10000;
     }
 
     .top-bar img {
@@ -89,7 +95,7 @@
 </head>
 <body>
 
-  <!-- ✅ الشريط العلوي -->
+  <!-- ✅ شريط علوي ثابت -->
   <div class="top-bar">
     <img src="tap.png" alt="اضغط">
     <span>انقر على الصورة لعرضها</span>
