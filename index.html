@@ -11,10 +11,9 @@
       background-color: #000;
       font-family: sans-serif;
       overflow-x: hidden;
-      padding-top: 50px; /* مساحة للشريط المثبت */
+      padding-top: 50px;
     }
 
-    /* ✅ الشريط العلوي */
     .top-bar {
       position: fixed;
       top: 0;
@@ -30,7 +29,7 @@
       font-size: 18px;
       font-weight: bold;
       z-index: 10000;
-      transform: translateX(100%); /* البداية خارج الشاشة */
+      transform: translateX(100%);
     }
 
     .top-bar img {
@@ -38,17 +37,31 @@
       width: auto;
     }
 
-    /* ✅ حركة دخول من اليمين إلى اليسار */
-    .slide-in {
-      animation: slideInFromRight 0.6s ease-out forwards;
+    /* دخول من اليمين → اليسار عند تحميل الصفحة */
+    .slide-in-left {
+      animation: slideInLeft 0.6s ease-out forwards;
     }
 
-    @keyframes slideInFromRight {
+    @keyframes slideInLeft {
       from {
         transform: translateX(100%);
       }
       to {
-        transform: translateX(0);
+        transform: translateX(0%);
+      }
+    }
+
+    /* دخول من اليسار → اليمين عند إغلاق الصورة */
+    .slide-in-right {
+      animation: slideInRight 0.6s ease-out forwards;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0%);
       }
     }
 
@@ -108,7 +121,6 @@
 </head>
 <body>
 
-  <!-- ✅ شريط علوي يظهر فقط عند التحميل وعودة من الصورة -->
   <div class="top-bar" id="topBar">
     <img src="tap.png" alt="اضغط">
     <span>انقر على الصورة لعرضها</span>
@@ -133,9 +145,9 @@
   <script>
     const topBar = document.getElementById('topBar');
 
-    // ✅ عند تحميل الصفحة، قم بتشغيل الحركة
+    // ✅ عند تحميل الصفحة: دخول من اليمين إلى اليسار
     window.addEventListener('load', () => {
-      topBar.classList.add('slide-in');
+      topBar.classList.add('slide-in-left');
     });
 
     function openFullscreen(src) {
@@ -146,7 +158,7 @@
       viewer.style.display = 'flex';
       document.body.style.overflow = 'hidden';
 
-      // 🚫 إخفاء الشريط بدون حركة
+      // 🚫 إخفاء الشريط مباشرة
       topBar.style.display = 'none';
     }
 
@@ -155,11 +167,11 @@
       viewer.style.display = 'none';
       document.body.style.overflow = 'auto';
 
-      // ✅ إظهار الشريط مجددًا مع حركة من اليمين إلى اليسار
+      // ✅ إظهار الشريط بحركة من اليسار إلى اليمين
       topBar.style.display = 'flex';
-      topBar.classList.remove('slide-in'); // إعادة تشغيل الأنميشن
-      void topBar.offsetWidth; // إعادة تدفق DOM
-      topBar.classList.add('slide-in');
+      topBar.classList.remove('slide-in-left', 'slide-in-right');
+      void topBar.offsetWidth; // لإعادة تحفيز الحركة
+      topBar.classList.add('slide-in-right');
     }
   </script>
 </body>
