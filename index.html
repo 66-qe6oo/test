@@ -14,6 +14,7 @@
       padding-top: 50px;
     }
 
+    /* ✅ الشريط العلوي */
     .top-bar {
       position: fixed;
       top: 0;
@@ -37,7 +38,7 @@
       width: auto;
     }
 
-    /* دخول من اليمين → اليسار عند تحميل الصفحة */
+    /* ✅ حركة دخول من اليمين → اليسار */
     .slide-in-left {
       animation: slideInLeft 0.6s ease-out forwards;
     }
@@ -51,7 +52,7 @@
       }
     }
 
-    /* دخول من اليسار → اليمين عند إغلاق الصورة */
+    /* ✅ حركة دخول من اليسار → اليمين */
     .slide-in-right {
       animation: slideInRight 0.6s ease-out forwards;
     }
@@ -121,11 +122,13 @@
 </head>
 <body>
 
+  <!-- ✅ شريط علوي -->
   <div class="top-bar" id="topBar">
     <img src="tap.png" alt="اضغط">
-    <span>انقر على الصورة لعرضها</span>
+    <span>يُرجى النقر على الصورة المختارة لعرضها</span>
   </div>
 
+  <!-- ✅ معرض الصور -->
   <div class="gallery">
     <img src="1.jpg" alt="صورة 1" onclick="openFullscreen(this.src)">
     <img src="2.jpg" alt="صورة 2" onclick="openFullscreen(this.src)">
@@ -137,15 +140,17 @@
     <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
   </div>
 
+  <!-- ✅ عرض الصورة بحجم كامل -->
   <div id="fullscreenViewer" onclick="closeFullscreen()">
     <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
     <img id="fullscreenImage" src="" alt="صورة مكبرة" />
   </div>
 
+  <!-- ✅ سكربت -->
   <script>
     const topBar = document.getElementById('topBar');
 
-    // ✅ عند تحميل الصفحة: دخول من اليمين إلى اليسار
+    // عند تحميل الصفحة: دخول من اليمين إلى اليسار
     window.addEventListener('load', () => {
       topBar.classList.add('slide-in-left');
     });
@@ -158,7 +163,7 @@
       viewer.style.display = 'flex';
       document.body.style.overflow = 'hidden';
 
-      // 🚫 إخفاء الشريط مباشرة
+      // إخفاء الشريط فورًا
       topBar.style.display = 'none';
     }
 
@@ -167,10 +172,10 @@
       viewer.style.display = 'none';
       document.body.style.overflow = 'auto';
 
-      // ✅ إظهار الشريط بحركة من اليسار إلى اليمين
+      // إعادة الشريط بحركة من اليسار إلى اليمين
       topBar.style.display = 'flex';
       topBar.classList.remove('slide-in-left', 'slide-in-right');
-      void topBar.offsetWidth; // لإعادة تحفيز الحركة
+      void topBar.offsetWidth; // إعادة تدفق DOM لإعادة تشغيل الأنميشن
       topBar.classList.add('slide-in-right');
     }
   </script>
