@@ -58,12 +58,8 @@
     }
 
     @keyframes slideInLeft {
-      from {
-        transform: translateX(100%);
-      }
-      to {
-        transform: translateX(0%);
-      }
+      from { transform: translateX(100%); }
+      to { transform: translateX(0%); }
     }
 
     .slide-in-right {
@@ -71,12 +67,8 @@
     }
 
     @keyframes slideInRight {
-      from {
-        transform: translateX(-100%);
-      }
-      to {
-        transform: translateX(0%);
-      }
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0%); }
     }
 
     .gallery {
@@ -106,14 +98,16 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      touch-action: pinch-zoom;
+      overflow: auto;
+      touch-action: auto;
+      cursor: grab;
     }
 
     #fullscreenViewer img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      touch-action: pinch-zoom;
+      display: block;
+      transform-origin: center center;
+      max-width: none;
+      max-height: none;
     }
 
     #fullscreenViewer button {
@@ -132,6 +126,7 @@
       align-items: center;
       justify-content: center;
       font-weight: bold;
+      z-index: 10001;
     }
   </style>
 </head>
@@ -162,30 +157,40 @@
 
   <script>
     const topBar = document.getElementById('topBar');
+    const fullscreenViewer = document.getElementById('fullscreenViewer');
+    const fullscreenImage = document.getElementById('fullscreenImage');
+    let scale = 1;
 
     window.addEventListener('load', () => {
       topBar.classList.add('slide-in-left');
     });
 
     function openFullscreen(src) {
-      const viewer = document.getElementById('fullscreenViewer');
-      const image = document.getElementById('fullscreenImage');
-
-      image.src = src;
-      viewer.style.display = 'flex';
+      fullscreenImage.src = src;
+      fullscreenViewer.style.display = 'flex';
       document.body.classList.add('no-zoom');
       topBar.style.display = 'none';
+      scale = 1;
+      fullscreenImage.style.transform = 'scale(1)';
     }
 
     function closeFullscreen() {
-      const viewer = document.getElementById('fullscreenViewer');
-      viewer.style.display = 'none';
+      fullscreenViewer.style.display = 'none';
       document.body.classList.remove('no-zoom');
       topBar.style.display = 'flex';
       topBar.classList.remove('slide-in-left', 'slide-in-right');
       void topBar.offsetWidth;
       topBar.classList.add('slide-in-right');
     }
+
+    fullscreenViewer.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) {
+        e.preventDefault();
+        scale += e.deltaY * -0.001;
+        scale = Math.min(Math.max(1, scale), 5);
+        fullscreenImage.style.transform = `scale(${scale})`;
+      }
+    }, { passive: false });
   </script>
 </body>
 </html>
