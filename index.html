@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>قهوة طوب</title>
   <style>
     body {
@@ -12,6 +12,13 @@
       font-family: sans-serif;
       overflow-x: hidden;
       padding-top: 45px;
+      touch-action: pan-y;
+      overscroll-behavior: none;
+    }
+
+    body.no-zoom {
+      touch-action: none;
+      overflow: hidden;
     }
 
     .top-bar {
@@ -99,12 +106,14 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
+      touch-action: pinch-zoom;
     }
 
     #fullscreenViewer img {
       width: 100vw;
       height: 100vh;
       object-fit: contain;
+      touch-action: pinch-zoom;
     }
 
     #fullscreenViewer button {
@@ -164,16 +173,14 @@
 
       image.src = src;
       viewer.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-
+      document.body.classList.add('no-zoom');
       topBar.style.display = 'none';
     }
 
     function closeFullscreen() {
       const viewer = document.getElementById('fullscreenViewer');
       viewer.style.display = 'none';
-      document.body.style.overflow = 'auto';
-
+      document.body.classList.remove('no-zoom');
       topBar.style.display = 'flex';
       topBar.classList.remove('slide-in-left', 'slide-in-right');
       void topBar.offsetWidth;
