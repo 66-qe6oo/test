@@ -129,6 +129,11 @@
       justify-content: center;
       font-weight: bold;
     }
+
+    /* ✅ تمكين الزوم عند فتح الصورة */
+    #fullscreenViewer.touch-zoom-enabled {
+      touch-action: pinch-zoom;
+    }
   </style>
 </head>
 <body>
@@ -169,10 +174,11 @@
 
       image.src = src;
       viewer.style.display = 'flex';
+      viewer.classList.add('touch-zoom-enabled'); // ✅ السماح بالزوم داخل الصورة
       document.body.style.overflow = 'hidden';
       topBar.style.display = 'none';
 
-      // السماح بالزوم عند فتح الصورة
+      // السماح بالزوم
       document.querySelector('meta[name="viewport"]').setAttribute('content',
         'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
     }
@@ -180,6 +186,7 @@
     function closeFullscreen() {
       const viewer = document.getElementById('fullscreenViewer');
       viewer.style.display = 'none';
+      viewer.classList.remove('touch-zoom-enabled'); // ❌ منع الزوم بعد الخروج
       document.body.style.overflow = 'auto';
       topBar.style.display = 'flex';
 
@@ -187,15 +194,18 @@
       void topBar.offsetWidth;
       topBar.classList.add('slide-in-right');
 
-      // إعادة منع الزوم بعد إغلاق الصورة
+      // منع الزوم مرة أخرى
       document.querySelector('meta[name="viewport"]').setAttribute('content',
         'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
     }
 
-    // منع الزوم بالإيماءات على الهواتف
+    // ✅ منع الزوم بالإيماءات في الصفحة الرئيسية
     document.addEventListener('gesturestart', function (e) {
-      e.preventDefault();
-    });
+      const viewer = document.getElementById('fullscreenViewer');
+      if (!viewer.classList.contains('touch-zoom-enabled')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   </script>
 </body>
 </html>
