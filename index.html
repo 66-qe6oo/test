@@ -56,12 +56,8 @@
     }
 
     @keyframes slideInLeft {
-      from {
-        transform: translateX(100%);
-      }
-      to {
-        transform: translateX(0%);
-      }
+      from { transform: translateX(100%); }
+      to { transform: translateX(0%); }
     }
 
     .slide-in-right {
@@ -69,12 +65,8 @@
     }
 
     @keyframes slideInRight {
-      from {
-        transform: translateX(-100%);
-      }
-      to {
-        transform: translateX(0%);
-      }
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0%); }
     }
 
     .gallery {
@@ -130,7 +122,6 @@
       font-weight: bold;
     }
 
-    /* ✅ تمكين الزوم عند فتح الصورة */
     #fullscreenViewer.touch-zoom-enabled {
       touch-action: pinch-zoom;
     }
@@ -156,7 +147,7 @@
     <img src="8.jpg" alt="صورة 8" onclick="openFullscreen(this.src)">
   </div>
 
-  <div id="fullscreenViewer" onclick="closeFullscreen()">
+  <div id="fullscreenViewer">
     <button onclick="closeFullscreen(); event.stopPropagation()">✕</button>
     <img id="fullscreenImage" src="" alt="صورة مكبرة" />
   </div>
@@ -174,11 +165,10 @@
 
       image.src = src;
       viewer.style.display = 'flex';
-      viewer.classList.add('touch-zoom-enabled'); // ✅ السماح بالزوم داخل الصورة
+      viewer.classList.add('touch-zoom-enabled');
       document.body.style.overflow = 'hidden';
       topBar.style.display = 'none';
 
-      // السماح بالزوم
       document.querySelector('meta[name="viewport"]').setAttribute('content',
         'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
     }
@@ -186,7 +176,7 @@
     function closeFullscreen() {
       const viewer = document.getElementById('fullscreenViewer');
       viewer.style.display = 'none';
-      viewer.classList.remove('touch-zoom-enabled'); // ❌ منع الزوم بعد الخروج
+      viewer.classList.remove('touch-zoom-enabled');
       document.body.style.overflow = 'auto';
       topBar.style.display = 'flex';
 
@@ -194,12 +184,10 @@
       void topBar.offsetWidth;
       topBar.classList.add('slide-in-right');
 
-      // منع الزوم مرة أخرى
       document.querySelector('meta[name="viewport"]').setAttribute('content',
         'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
     }
 
-    // ✅ منع الزوم بالإيماءات في الصفحة الرئيسية
     document.addEventListener('gesturestart', function (e) {
       const viewer = document.getElementById('fullscreenViewer');
       if (!viewer.classList.contains('touch-zoom-enabled')) {
