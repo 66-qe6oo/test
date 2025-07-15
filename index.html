@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>قهوة طوب</title>
   <style>
+    html, body {
+      touch-action: manipulation;
+      overscroll-behavior: none;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -168,7 +173,8 @@
       topBar.style.display = 'none';
 
       // السماح بالزوم عند فتح الصورة
-      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
+      document.querySelector('meta[name="viewport"]').setAttribute('content',
+        'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
     }
 
     function closeFullscreen() {
@@ -181,9 +187,15 @@
       void topBar.offsetWidth;
       topBar.classList.add('slide-in-right');
 
-      // إعادة منع الزوم
-      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+      // إعادة منع الزوم بعد إغلاق الصورة
+      document.querySelector('meta[name="viewport"]').setAttribute('content',
+        'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
     }
+
+    // منع الزوم بالإيماءات على الهواتف
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>
