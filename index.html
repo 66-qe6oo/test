@@ -15,14 +15,13 @@
       height:100%;
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", sans-serif;
+      background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);
+      color:#fff;
     }
     body{
       display:flex;
-      align-items:center;
       justify-content:center;
-      padding:20px;
-      background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);
-      color:#fff
+      padding:40px 20px; /* مسافة علوية */
     }
     .container{
       width:100%;
@@ -30,6 +29,7 @@
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:var(--gap);
+      text-align:center;
     }
     @media (max-width:760px){
       .container{grid-template-columns:1fr;}
@@ -41,12 +41,11 @@
       box-shadow:0 6px 18px rgba(0,0,0,0.6);
       display:flex;
       flex-direction:column;
-      min-height:240px;
-      overflow:hidden;
+      align-items:center;
     }
     .card h2{
       margin:0 0 12px 0;
-      font-size:18px;
+      font-size:20px;
       color:var(--accent);
     }
     /* الخانة الأولى */
@@ -54,7 +53,6 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:center;
       gap:12px;
       cursor:pointer
     }
@@ -84,12 +82,17 @@
       color:var(--accent);
       font-weight:600
     }
-    /* الخانة الثانية */
+    /* صور الحلا */
+    .gallery-wrapper{
+      border:2px solid var(--accent);
+      border-radius:var(--radius);
+      padding:10px;
+      background:rgba(0,0,0,0.4);
+    }
     .gallery-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:10px;
-      align-content:start
     }
     @media (max-width:480px){
       .gallery-grid{grid-template-columns:repeat(2,1fr);}
@@ -102,7 +105,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      border:2px solid rgba(255,255,255,0.03);
+      border:2px solid rgba(255,255,255,0.1);
       background:#000;
     }
     .thumb img{
@@ -114,9 +117,6 @@
     }
     .thumb:hover img{
       transform:scale(1.05);
-    }
-    .right-card{
-      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
     }
     /* Lightbox */
     .lightbox{
@@ -165,10 +165,10 @@
 </head>
 <body>
   <div class="container" dir="rtl">
-    <!-- الخانة الأولى -->
+    <!-- المنيو -->
     <section class="card">
       <h2>المنيو</h2>
-      <div class="menu-box" id="menuBox" tabindex="0">
+      <div class="menu-box" id="menuBox">
         <div class="menu-thumb">
           <img src="1.png" alt="منيو 1" id="menuMainImg">
         </div>
@@ -177,18 +177,19 @@
       <p class="footer-note">اضغط على الزر أو الصورة لعرضها بالحجم الكامل</p>
     </section>
 
-    <!-- الخانة الثانية -->
-    <section class="card right-card">
-      <h2>باقي الصور</h2>
-      <div class="gallery-grid" id="gallery">
-        <div class="thumb"><img src="2.png" alt="صورة 2" data-full="2.png"></div>
-        <div class="thumb"><img src="3.png" alt="صورة 3" data-full="3.png"></div>
-        <div class="thumb"><img src="4.png" alt="صورة 4" data-full="4.png"></div>
-        <div class="thumb"><img src="5.png" alt="صورة 5" data-full="5.png"></div>
-        <div class="thumb"><img src="6.png" alt="صورة 6" data-full="6.png"></div>
-        <div class="thumb"><img src="7.png" alt="صورة 7" data-full="7.png"></div>
+    <!-- صور الحلا -->
+    <section class="card">
+      <h2>صور الحلا</h2>
+      <div class="gallery-wrapper">
+        <div class="gallery-grid" id="gallery">
+          <div class="thumb"><img src="2.png" alt="صورة 2" data-full="2.png"></div>
+          <div class="thumb"><img src="3.png" alt="صورة 3" data-full="3.png"></div>
+          <div class="thumb"><img src="4.png" alt="صورة 4" data-full="4.png"></div>
+          <div class="thumb"><img src="5.png" alt="صورة 5" data-full="5.png"></div>
+          <div class="thumb"><img src="6.png" alt="صورة 6" data-full="6.png"></div>
+          <div class="thumb"><img src="7.png" alt="صورة 7" data-full="7.png"></div>
+        </div>
       </div>
-      <p class="footer-note">اضغط على أي صورة لعرضها بالحجم الكامل</p>
     </section>
   </div>
 
