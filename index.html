@@ -43,11 +43,6 @@
       flex-direction:column;
       align-items:center;
     }
-    .card h2{
-      margin:-6px 0 4px 0; /* رفع العنوان وتقليل المسافة أسفله */
-      font-size:20px;
-      color:var(--accent);
-    }
     .note{
       color:#fff;
       font-size:14px;
@@ -151,12 +146,11 @@
 </head>
 <body>
   <div class="container" dir="rtl">
-    <!-- المنيو -->
+    <!-- المنيو (بدون عنوان) -->
     <section class="card">
-      <h2>المنيو</h2>
       <div class="menu-box" id="menuBox">
         <div class="menu-thumb">
-          <img src="1.png" alt="منيو 1" id="menuMainImg">
+          <img src="1.png" alt="منيو" id="menuMainImg">
         </div>
         <button class="menu-btn" id="openMenu">عرض المنيو الكامل</button>
       </div>
@@ -164,7 +158,7 @@
 
     <!-- صور الحلا -->
     <section class="card">
-      <h2>صور الحلا</h2>
+      <h2 style="margin:-6px 0 4px 0; font-size:20px; color:var(--accent);">صور الحلا</h2>
       <p class="note">انقر على الصورة المختارة لعرضها</p>
       <div class="gallery-grid" id="gallery">
         <div class="thumb"><img src="2.png" alt="صورة 2" data-full="2.png"></div>
