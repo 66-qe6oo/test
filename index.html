@@ -48,6 +48,12 @@
       font-size:20px;
       color:var(--accent);
     }
+    .note{
+      color:#fff;
+      font-size:14px;
+      margin:0 0 10px 0;
+      text-align:center;
+    }
     /* المنيو */
     .menu-box{
       display:flex;
@@ -159,6 +165,7 @@
     <!-- صور الحلا -->
     <section class="card">
       <h2>صور الحلا</h2>
+      <p class="note">انقر على الصورة المختارة لعرضها</p>
       <div class="gallery-grid" id="gallery">
         <div class="thumb"><img src="2.png" alt="صورة 2" data-full="2.png"></div>
         <div class="thumb"><img src="3.png" alt="صورة 3" data-full="3.png"></div>
@@ -180,7 +187,6 @@
 
   <script>
     const openMenu = document.getElementById('openMenu');
-    const menuBox = document.getElementById('menuBox');
     const menuMainImg = document.getElementById('menuMainImg');
     const gallery = document.getElementById('gallery');
     const lightbox = document.getElementById('lightbox');
