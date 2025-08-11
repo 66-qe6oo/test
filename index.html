@@ -44,10 +44,19 @@
       align-items:center;
     }
     .note{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px; /* مسافة بين الأيقونة والنص */
       color:#fff;
       font-size:14px;
       margin:0 0 10px 0;
       text-align:center;
+    }
+    .note img{
+      width:18px;
+      height:18px;
+      display:block;
     }
     /* المنيو */
     .menu-box{
@@ -146,7 +155,7 @@
 </head>
 <body>
   <div class="container" dir="rtl">
-    <!-- المنيو (بدون عنوان) -->
+    <!-- المنيو بدون عنوان -->
     <section class="card">
       <div class="menu-box" id="menuBox">
         <div class="menu-thumb">
@@ -159,7 +168,10 @@
     <!-- صور الحلا -->
     <section class="card">
       <h2 style="margin:-6px 0 4px 0; font-size:20px; color:var(--accent);">صور الحلا</h2>
-      <p class="note">انقر على الصورة المختارة لعرضها</p>
+      <div class="note">
+        <img src="tap.png" alt="Tap Icon">
+        <span>انقر على الصورة المختارة لعرضها</span>
+      </div>
       <div class="gallery-grid" id="gallery">
         <div class="thumb"><img src="2.png" alt="صورة 2" data-full="2.png"></div>
         <div class="thumb"><img src="3.png" alt="صورة 3" data-full="3.png"></div>
