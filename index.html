@@ -6,55 +6,161 @@
   <title>معرض المنيو</title>
   <style>
     :root{
-      --accent: #ac3c34; /* اللون الذي طلبته */
+      --accent: #ac3c34;
       --bg-dark: #121212;
       --gap: 14px;
       --radius: 12px;
     }
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans Arabic",sans-serif;}
-    body{display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);color:#fff}
-
-    .container{
-      width:100%;max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", sans-serif;
     }
-
-    /* Responsive: stack on small screens */
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);
+      color:#fff
+    }
+    .container{
+      width:100%;
+      max-width:1100px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:var(--gap);
+    }
     @media (max-width:760px){
       .container{grid-template-columns:1fr;}
     }
-
     .card{
-      background:var(--bg-dark);padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,0.6);display:flex;flex-direction:column;min-height:240px;overflow:hidden;
+      background:var(--bg-dark);
+      padding:18px;
+      border-radius:var(--radius);
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+      display:flex;
+      flex-direction:column;
+      min-height:240px;
+      overflow:hidden;
     }
-
-    .card h2{margin:0 0 12px 0;font-size:18px;color:var(--accent);}
-
-    /* الخانة الأولى: المنيو */
-    .menu-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer}
-    .menu-thumb{width:100%;max-width:420px;height:220px;border-radius:10px;overflow:hidden;border:3px solid rgba(172,60,52,0.12);display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
-    .menu-thumb img{width:100%;height:100%;object-fit:contain;display:block}
-    .menu-btn{background:transparent;border:2px solid var(--accent);padding:8px 14px;border-radius:999px;color:var(--accent);font-weight:600}
-
-    /* الخانة الثانية: باقي الصور */
-    .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;align-content:start}
-    @media (max-width:480px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+    .card h2{
+      margin:0 0 12px 0;
+      font-size:18px;
+      color:var(--accent);
+    }
+    /* الخانة الأولى */
+    .menu-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      cursor:pointer
+    }
+    .menu-thumb{
+      width:100%;
+      max-width:420px;
+      height:220px;
+      border-radius:10px;
+      overflow:hidden;
+      border:3px solid rgba(172,60,52,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+    .menu-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .menu-btn{
+      background:transparent;
+      border:2px solid var(--accent);
+      padding:8px 14px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:600
+    }
+    /* الخانة الثانية */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      align-content:start
+    }
+    @media (max-width:480px){
+      .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    }
     .thumb{
-      border-radius:8px;overflow:hidden;min-height:90px;height:120px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.03);
+      border-radius:8px;
+      overflow:hidden;
+      min-height:90px;
+      height:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:2px solid rgba(255,255,255,0.03);
+      background:#000;
     }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1);transition:transform .25s ease}
-    .thumb:hover img{transform:scale(1.05)}
-
-    /* dark overlay area for the right card */
-    .right-card{background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));}
-
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      transition:transform .25s ease;
+    }
+    .thumb:hover img{
+      transform:scale(1.05);
+    }
+    .right-card{
+      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+    }
     /* Lightbox */
-    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:1200;padding:20px}
+    .lightbox{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,0.8);
+      z-index:1200;
+      padding:20px
+    }
     .lightbox.open{display:flex}
-    .lightbox-inner{max-width:960px;width:100%;max-height:90vh;background:transparent;display:flex;flex-direction:column;gap:12px}
-    .lightbox img{width:100%;height:auto;max-height:82vh;object-fit:contain;border-radius:12px}
-    .close{align-self:flex-end;background:var(--accent);border:none;color:#fff;padding:8px 12px;border-radius:8px;font-weight:700;cursor:pointer}
-
-    .footer-note{margin-top:auto;font-size:13px;opacity:.7;color:#ddd}
+    .lightbox-inner{
+      max-width:960px;
+      width:100%;
+      max-height:90vh;
+      display:flex;
+      flex-direction:column;
+      gap:12px
+    }
+    .lightbox img{
+      width:100%;
+      height:auto;
+      max-height:82vh;
+      object-fit:contain;
+      border-radius:12px
+    }
+    .close{
+      align-self:flex-end;
+      background:var(--accent);
+      border:none;
+      color:#fff;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer
+    }
+    .footer-note{
+      margin-top:auto;
+      font-size:13px;
+      opacity:.7;
+      color:#ddd
+    }
   </style>
 </head>
 <body>
@@ -62,10 +168,9 @@
     <!-- الخانة الأولى -->
     <section class="card">
       <h2>المنيو</h2>
-      <div class="menu-box" id="menuBox" tabindex="0" role="button" aria-pressed="false">
+      <div class="menu-box" id="menuBox" tabindex="0">
         <div class="menu-thumb">
-          <!-- عينات: تأكد من وضع الصور في مجلد "images" داخل نفس مجلد هذا الملف أو عدّل المسارات -->
-          <img src="images/1.png" alt="منيو 1" id="menuMainImg">
+          <img src="1.png" alt="منيو 1" id="menuMainImg">
         </div>
         <button class="menu-btn" id="openMenu">عرض المنيو الكامل</button>
       </div>
@@ -76,28 +181,26 @@
     <section class="card right-card">
       <h2>باقي الصور</h2>
       <div class="gallery-grid" id="gallery">
-        <!-- Mini thumbnails 2.png .. 7.png -->
-        <div class="thumb"><img src="images/2.png" alt="صورة 2" data-full="images/2.png"></div>
-        <div class="thumb"><img src="images/3.png" alt="صورة 3" data-full="images/3.png"></div>
-        <div class="thumb"><img src="images/4.png" alt="صورة 4" data-full="images/4.png"></div>
-        <div class="thumb"><img src="images/5.png" alt="صورة 5" data-full="images/5.png"></div>
-        <div class="thumb"><img src="images/6.png" alt="صورة 6" data-full="images/6.png"></div>
-        <div class="thumb"><img src="images/7.png" alt="صورة 7" data-full="images/7.png"></div>
+        <div class="thumb"><img src="2.png" alt="صورة 2" data-full="2.png"></div>
+        <div class="thumb"><img src="3.png" alt="صورة 3" data-full="3.png"></div>
+        <div class="thumb"><img src="4.png" alt="صورة 4" data-full="4.png"></div>
+        <div class="thumb"><img src="5.png" alt="صورة 5" data-full="5.png"></div>
+        <div class="thumb"><img src="6.png" alt="صورة 6" data-full="6.png"></div>
+        <div class="thumb"><img src="7.png" alt="صورة 7" data-full="7.png"></div>
       </div>
-      <p class="footer-note">خلفية مظلمة لعرض الصور الثانوية. اضغط على أي صورة لفتحها بالحجم الكامل.</p>
+      <p class="footer-note">اضغط على أي صورة لعرضها بالحجم الكامل</p>
     </section>
   </div>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightbox-inner" role="dialog" aria-modal="true">
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
       <button class="close" id="closeBtn">إغلاق</button>
       <img src="" alt="" id="lightboxImg">
     </div>
   </div>
 
   <script>
-    // العناصر
     const openMenu = document.getElementById('openMenu');
     const menuBox = document.getElementById('menuBox');
     const menuMainImg = document.getElementById('menuMainImg');
@@ -110,45 +213,23 @@
       lightboxImg.src = src;
       lightboxImg.alt = alt || '';
       lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
     }
     function closeLightbox(){
       lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden','true');
-      // remove src to avoid playing big images in background
       setTimeout(()=>lightboxImg.src = '',250);
     }
 
-    // عندما يضغط المستخدم على زر المنيو أو الخانة
     openMenu.addEventListener('click', ()=> openLightbox(menuMainImg.src, menuMainImg.alt));
-    menuBox.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openLightbox(menuMainImg.src, menuMainImg.alt); });
     menuMainImg.addEventListener('click', ()=> openLightbox(menuMainImg.src, menuMainImg.alt));
-
-    // فتح الصور الصغيرة
     gallery.addEventListener('click', (e)=>{
       const img = e.target.closest('img');
       if(!img) return;
-      const src = img.dataset.full || img.src;
-      openLightbox(src, img.alt);
+      openLightbox(img.dataset.full || img.src, img.alt);
     });
 
-    // اغلاق
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
-
-    // تحسين: لو لم تكن الصور متوفرة، نعرض placeholder بسيط
-    function checkImage(url, imgEl){
-      const test = new Image();
-      test.onload = ()=> imgEl.src = url;
-      test.onerror = ()=> imgEl.style.opacity = 0.12;
-      test.src = url;
-    }
-    // نفحص الصور عند التحميل
-    document.querySelectorAll('img').forEach(img => {
-      const src = img.getAttribute('src');
-      if(src) checkImage(src, img);
-    });
   </script>
 </body>
 </html>
